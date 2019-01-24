@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {createStore} from 'redux'
+import React from 'react'
+import { connect } from 'react-redux'
+import { add, remove, addAsync } from './index.redux'
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
-class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <h1> App is now, num is {this.props.num}</h1>
+        <button onClick={this.props.add}>add num</button>
+        <button onClick={this.props.addAsync}>add num with delay</button>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+const mapStatetoProps = state => {
+  return { num: state }
+}
+const actionCreators = { add, remove, addAsync }
+// connect 会把state挂载到props上，另外方法调用会自动dispatch，不用通过store.dispatch
+App = connect(
+  mapStatetoProps,
+  actionCreators
+)(App)
+export default App

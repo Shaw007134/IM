@@ -1,12 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDom from 'react-dom'
+import App from './App'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+// 使用redux-thunk来处理异步情况
+import { counter } from './index.redux'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore(
+  counter,
+  compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : () => {}
+  )
+)
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+
+  ReactDom.render(
+    // 利用provider传入store，无须手动指定很多props
+    (<Provider store={store}>
+      <App  />
+    </Provider>),
+    document.getElementById('root')
+  )
