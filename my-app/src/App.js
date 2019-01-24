@@ -13,14 +13,12 @@ import { add, remove, addAsync } from './index.redux'
 
 @connect(
   // state中需要的属性
-  state => ({ num: state }),
+  state => ({ num: state.counter }),
   // store中的方法，会被放到props中，自动dispatch
   { add, remove, addAsync }
 )
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+
 
   render() {
     return (
