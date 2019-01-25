@@ -2,12 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { login } from './Auth.redux'
 import { Redirect } from 'react-router-dom'
+import Axios from 'axios';
 // 两个reducers, 每个reducers都有一个state
 @connect(
   state => state.auth,
   { login }
 )
 class Auth extends React.Component {
+  componentDidMount() {
+    axios
+  }
   render() {
     return (
       <div>

@@ -24,22 +24,22 @@ const User = mongoose.model('user',new mongoose.Schema({
 // })
 
 //数据库的删除
-User.remove({age: 25},function(err,doc){
-  if (!err) {
-    console.log('delete success')
-    User.find({},function(e,d){
-      console.log(d)
-    })
-  }
-})
+// User.remove({age: 25},function(err,doc){
+//   if (!err) {
+//     console.log('delete success')
+//     User.find({},function(e,d){
+//       console.log(d)
+//     })
+//   }
+// })
 
-//数据库的更新
-User.update({'user':'React_IM'},{'$set':{age:28}},function(err,doc){
-  if(!err) {
-    console.log('update success')
-    console.log(doc)
-  }
-})
+// //数据库的更新
+// User.update({'user':'React_IM'},{'$set':{age:28}},function(err,doc){
+//   if(!err) {
+//     console.log('update success')
+//     console.log(doc)
+//   }
+// })
 
 const app = express()
 

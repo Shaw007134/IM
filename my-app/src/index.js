@@ -16,7 +16,6 @@ const store = createStore(
     window.devToolsExtension ? window.devToolsExtension() : () => {}
   )
 )
-console.log(store.getState())
 // class Test extends React.Component {
 //   render() {
 //     console.log(this.props)
