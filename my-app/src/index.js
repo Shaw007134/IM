@@ -11,6 +11,9 @@ import Login from './container/login/login'
 import Register from './container/register/register'
 import AuthRoute from './component/authroute/authroute'
 import './index.css'
+import BossInfo from './container/boss-info/boss-info'
+import CandidateInfo from './container/candidate-info/candidate-info'
+
 const store = createStore(
   reducers,
   compose(
@@ -21,16 +24,14 @@ const store = createStore(
   )
 )
 
-function Boss() {
-  return <h2>Boss页面</h2>
-}
-
 ReactDom.render(
   <Provider store={store}>
     <BrowserRouter>
       <div>
         <AuthRoute />
-        <Route path="/boss" component={Boss} />
+        <Route path="/" exact component={Login} />
+        <Route path="/boss/info" component={BossInfo} />
+        <Route path="/candidate/info" component={CandidateInfo} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
       </div>
