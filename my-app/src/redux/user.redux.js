@@ -36,7 +36,8 @@ function errorMsg(msg) {
   return { msg, type: ERROR_MSG }
 }
 
-function authSuccess(data) {
+function authSuccess(obj) {
+  const { pwd, ...data } = obj
   return { type: AUTH_SUCCESS, payload: data }
 }
 
