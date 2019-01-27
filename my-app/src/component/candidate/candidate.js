@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { getUserList } from '../../redux/chat.redux'
-import { Card, WhiteSpace, WingBlank } from 'antd-mobile'
+import UserCard from '../user-card/user-card'
 
 @connect(
   state => state.chatUser,
@@ -20,22 +20,7 @@ class Candidate extends React.Component {
   }
   render() {
     console.log(this.state)
-    const Header = Card.Header
-    return (
-      <WingBlank>
-        {this.props.userList.map(v =>
-          v.avatar ? (
-            <Card key={v._id}>
-              <Header
-                title={v.user}
-                thumb={require(`../../assets/avatar/${v.avatar}.png`)}
-                extra={<span>{v.title}</span>}
-              />
-            </Card>
-          ) : null
-        )}
-      </WingBlank>
-    )
+    return <UserCard userList={this.props.userList} />
   }
 }
 
