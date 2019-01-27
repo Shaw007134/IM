@@ -14,6 +14,7 @@ import AuthRoute from './component/authroute/authroute'
 import BossInfo from './container/boss-info/boss-info'
 import CandidateInfo from './container/candidate-info/candidate-info'
 import DashBoard from './component/dashboard/dashboard'
+import Chat from './component/chat/chat'
 
 const store = createStore(
   reducers,
@@ -21,7 +22,7 @@ const store = createStore(
     applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : () => {}
+      : f => f
   )
 )
 
@@ -36,6 +37,7 @@ ReactDom.render(
           <Route path="/candidate/info" component={CandidateInfo} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/chat/:user" component={Chat} />
           <Route component={DashBoard} />
         </Switch>
       </div>

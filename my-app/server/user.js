@@ -4,12 +4,28 @@ const model = require('./model')
 const User = model.getModel('user')
 const utils = require('utility')
 const __filter = { pwd: 0, __v: 0 }
+const Chat = model.getModel('chat')
 
 Router.get('/list', (req, res) => {
   const { type } = req.query
   // User.remove({},function(err,doc){})
   User.find({ type }, function(err, doc) {
     return res.json({ code: 0, data: doc })
+  })
+})
+
+Router.get('/getmsglist', (req, res) => {
+  const user = req.cookies.userid
+  User.find({}, function(err, userdoc) {
+    let users = {}
+    userdoc.forEach(v => {
+      users[v._id] = { name: v.user, avatar: v.avatar }
+    })
+    Chat.find({ $or: [{ from: user }, { to: user }] }, function(err, doc) {
+      if (!err) {
+        return res.json({ code: 0, msgs: doc, users: users })
+      }
+    })
   })
 })
 Router.post('/update', function(req, res) {
@@ -62,7 +78,6 @@ Router.post('/register', (req, res) => {
 })
 
 Router.get('/info', (req, res) => {
-  console.log(req.cookies)
   const { userid } = req.cookies
   if (!userid) {
     return res.json({ code: 1 })
