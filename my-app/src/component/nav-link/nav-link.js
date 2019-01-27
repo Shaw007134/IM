@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom'
 class NavLinkBar extends React.Component {
   render() {
     const navList = this.props.data.filter(v => !v.hide)
-    console.log(navList)
     const { pathname } = this.props.location
     return (
       <TabBar>

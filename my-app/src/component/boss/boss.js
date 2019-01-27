@@ -18,7 +18,6 @@ class Boss extends React.Component {
     this.props.getUserList('candidate')
   }
   render() {
-    console.log(this.state)
     const Header = Card.Header
     const Body = Card.Body
     return (
