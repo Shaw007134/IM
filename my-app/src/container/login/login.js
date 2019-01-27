@@ -5,6 +5,36 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { login } from '../../redux/user.redux'
 
+//高阶组件，本质是接收一个组件作为参数，返回一个基于传入的组件新构建的组件的函数
+//有两种高阶组件
+//1. 属性代理 -- 在给组件加额外props或此外添加其他信息
+function HelloWrapper(Com) {
+  class WrapComp extends React.Component {
+    render() {
+      return (
+        <div>
+          <p>我是HOC wrapper</p>
+          <Com name="text" {...this.props} />
+        </div>
+      )
+    }
+  }
+  return WrapComp
+}
+
+//2. 反向继承
+
+
+//@其实就是高阶组件的修饰器
+@HelloWrapper
+class Hello extends React.Component {
+  render() {
+    return <p>Hello, i love react</p>
+  }
+}
+
+// Hello = HelloWrapper(Hello)
+
 @connect(
   state => state.user,
   { login }
@@ -34,7 +64,10 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        {this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : null}
+        <Hello />
+        {this.props.redirectTo && this.props.redirectTo !== '/login' ? (
+          <Redirect to={this.props.redirectTo} />
+        ) : null}
         <Logo />
         <WingBlank>
           <List>

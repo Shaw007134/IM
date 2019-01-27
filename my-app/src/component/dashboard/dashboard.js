@@ -5,14 +5,13 @@ import NavLinkBar from '../nav-link/nav-link'
 import { connect } from 'react-redux'
 import Boss from '../boss/boss'
 import Candidate from '../candidate/candidate'
+import UserCenter from '../user-center/user-center';
 
 function Msg() {
   return <h2>消息列表</h2>
 }
 
-function User() {
-  return <h2>Me</h2>
-}
+
 @connect(state => state)
 class DashBoard extends React.Component {
   render() {
@@ -47,13 +46,13 @@ class DashBoard extends React.Component {
         text: '我',
         icon: 'user',
         title: '个人中心',
-        component: User
+        component: UserCenter
       }
     ]
     return (
       <div>
         <NavBar className="fixd-header" mode="dard">
-          {navList.find(v => v.path == pathname).title}
+          {navList.find(v => v.path === pathname).title}
         </NavBar>
         <div style={{ marginTop: 45 }}>
           <Switch>
