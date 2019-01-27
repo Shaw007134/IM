@@ -15,6 +15,7 @@ class Chat extends React.Component {
     this.state = { text: '', msg: [], showEmoji: false }
   }
   componentDidMount() {
+    console.log('chat + ' + this.props.chat.chatmsg)
     if (!this.props.chat.chatmsg.length) {
       this.props.getMsgList()
       this.props.receiveMsg()

@@ -7,10 +7,7 @@ import { getMsgList, receiveMsg } from '../../redux/chat.redux'
 import Boss from '../boss/boss'
 import Candidate from '../candidate/candidate'
 import UserCenter from '../user-center/user-center'
-
-function Msg() {
-  return <h2>消息列表</h2>
-}
+import Msg from '../../component/msg/msg'
 
 @connect(
   state => state,
@@ -18,6 +15,7 @@ function Msg() {
 )
 class DashBoard extends React.Component {
   componentDidMount() {
+    console.log('DashBoard + ' + this.props.chat.chatmsg)
     if (!this.props.chat.chatmsg.length) {
       this.props.getMsgList()
       this.props.receiveMsg()
