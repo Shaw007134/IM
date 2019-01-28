@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavBar } from 'antd-mobile'
-import { Switch, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import NavLinkBar from '../nav-link/nav-link'
 import { connect } from 'react-redux'
 import { getMsgList, receiveMsg } from '../../redux/chat.redux'

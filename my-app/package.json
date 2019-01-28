@@ -70,12 +70,6 @@
   "proxy": [
     "http://localhost:9000"
   ],
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "devDependencies": {
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "less": "^3.9.0",

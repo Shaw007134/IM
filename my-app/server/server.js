@@ -4,12 +4,11 @@ const cookieParser = require('cookie-parser')
 const userRouter = require('./user')
 const model = require('./model')
 const Chat = model.getModel('chat')
-
+const path = require('path')
 const app = express()
 // 将socket 与 express关联
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
-
 
 io.on('connection', function(socket) {
   socket.on('sendmsg', function(data) {
@@ -26,7 +25,14 @@ io.on('connection', function(socket) {
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use('/user', userRouter)
-
+app.use(function(req,res,next){
+  if (req.url.startsWith('/user/')||req.url.startsWith('/static')){
+    return next()
+  }
+  console.log(path.resolve('build/index.html'))
+  return res.sendFile(path.resolve('build/index.html'))
+})
+app.use('/',express.static(path.resolve('build')))
 server.listen(9000, function() {
   console.log('Node app start at port 9000')
 })
