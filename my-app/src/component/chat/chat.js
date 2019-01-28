@@ -1,6 +1,7 @@
 import React from 'react'
 import { List, InputItem, NavBar, Icon, Grid } from 'antd-mobile'
 import { connect } from 'react-redux'
+import QueueAnim from 'rc-queue-anim'
 import {
   sendMsg,
   getMsgList,
@@ -20,14 +21,13 @@ class Chat extends React.Component {
     this.state = { text: '', msg: [], showEmoji: false }
   }
   componentDidMount() {
-    console.log('chat + ' + this.props.chat.chatmsg)
     if (!this.props.chat.chatmsg.length) {
       this.props.getMsgList()
       this.props.receiveMsg()
     }
     this.fixCarousel()
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     const to = this.props.match.params.user
     this.props.readMsg(to)
   }
@@ -71,22 +71,24 @@ class Chat extends React.Component {
         >
           {users[userid].name}
         </NavBar>
-        {chatmsgs.map(v => {
-          const avatar = require(`../../assets/avatar/${
-            users[v.from].avatar
-          }.png`)
-          return v.from === userid ? (
-            <List key={v._id}>
-              <Item thumb={avatar}>{v.content}</Item>
-            </List>
-          ) : (
-            <List key={v._id}>
-              <Item extra={<img src={avatar} />} className="chat-me">
-                {v.content}
-              </Item>
-            </List>
-          )
-        })}
+        <QueueAnim type="right" delay={100}>
+          {chatmsgs.map(v => {
+            const avatar = require(`../../assets/avatar/${
+              users[v.from].avatar
+            }.png`)
+            return v.from === userid ? (
+              <List key={v._id}>
+                <Item thumb={avatar}>{v.content}</Item>
+              </List>
+            ) : (
+              <List key={v._id}>
+                <Item extra={<img src={avatar} />} className="chat-me">
+                  {v.content}
+                </Item>
+              </List>
+            )
+          })}
+        </QueueAnim>
         <div className="stick-footer">
           <InputItem
             placeholder="请输入"

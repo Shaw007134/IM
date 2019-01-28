@@ -8,7 +8,7 @@ import Boss from '../boss/boss'
 import Candidate from '../candidate/candidate'
 import UserCenter from '../user-center/user-center'
 import Msg from '../../component/msg/msg'
-
+import QueueAnim from 'rc-queue-anim'
 @connect(
   state => state,
   { getMsgList, receiveMsg }
@@ -55,17 +55,27 @@ class DashBoard extends React.Component {
         component: UserCenter
       }
     ]
+    const page = navList.find(v => v.path === pathname)
+    console.log(page)
     return (
       <div>
         <NavBar className="fixd-header" mode="dard">
           {navList.find(v => v.path === pathname).title}
         </NavBar>
         <div style={{ marginTop: 45 }}>
-          <Switch>
-            {navList.map(v => (
-              <Route key={v.path} path={v.path} component={v.component} />
-            ))}
-          </Switch>
+          {/* <Switch> */}
+          <QueueAnim type="scaleX" duration={800}>
+            <Route
+              key={page.path}
+              path={page.path}
+              component={page.component}
+            />
+
+            {/* {navList.map(v => ( */}
+            {/* <Route key={v.path} path={v.path} component={v.component} /> */}
+            {/* ))} */}
+          </QueueAnim>
+          {/* </Switch> */}
         </div>
         <NavLinkBar data={navList} />
       </div>
