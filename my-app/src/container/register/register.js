@@ -50,21 +50,21 @@ class Register extends React.Component {
               <p className="error-msg">{this.props.msg}</p>
             ) : null}
             <InputItem onChange={v => this.props.handleChange('user', v)}>
-              用户名
+              User Name
             </InputItem>
             <WhiteSpace />
             <InputItem
               type="password"
               onChange={v => this.props.handleChange('pwd', v)}
             >
-              密码
+              Password
             </InputItem>
             <WhiteSpace />
             <InputItem
               type="password"
               onChange={v => this.props.handleChange('repeatpwd', v)}
             >
-              确认密码
+              Confirm password
             </InputItem>
             <WhiteSpace />
 
@@ -83,7 +83,7 @@ class Register extends React.Component {
             <WhiteSpace />
           </List>
           <Button type="primary" onClick={this.handleRegister}>
-            注册
+            Register
           </Button>
         </WingBlank>
       </div>

@@ -13,7 +13,7 @@ class CandidateInfo extends React.Component {
     super(props)
     this.state = {
       title: '',
-      desc: '',
+      desc: ''
     }
   }
   onChange(key, val) {
@@ -29,22 +29,20 @@ class CandidateInfo extends React.Component {
         {redirect && redirect !== path ? (
           <Redirect to={this.props.redirectTo} />
         ) : null}
-        <NavBar mode="dark">Candidate信息完善页面</NavBar>
+        <NavBar mode="dark">Candidate Info</NavBar>
         <AvatarSelector
           selectAvatar={img => {
-            this.setState({
-              avatar: img
-            })
+            this.setState({ avatar: img })
           }}
         />
         <InputItem onChange={v => this.onChange('title', v)}>
-          求职岗位
+          Career Objective
         </InputItem>
         <TextareaItem
           onChange={v => this.onChange('desc', v)}
           rows={3}
           autoHeight
-          title="个人简介"
+          title="Personal Profile"
         />
         <Button
           onClick={() => {
@@ -53,7 +51,7 @@ class CandidateInfo extends React.Component {
           }}
           type="primary"
         >
-          保存
+          Save
         </Button>
       </div>
     )

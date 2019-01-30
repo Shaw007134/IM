@@ -4,7 +4,7 @@ import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { login } from '../../redux/user.redux'
-import Wrapper from '../../component/wrapper/wrapper';
+import Wrapper from '../../component/wrapper/wrapper'
 
 //高阶组件，本质是接收一个组件作为参数，返回一个基于传入的组件新构建的组件的函数
 //功能：代码复用，逻辑抽象，渲染劫持
@@ -86,24 +86,24 @@ class Login extends React.Component {
               <p className="error-msg">{this.props.msg}</p>
             ) : null}
             <InputItem onChange={v => this.props.handleChange('user', v)}>
-              用户名
+              Username:
             </InputItem>
             <WhiteSpace />
             <InputItem
               type="password"
               onChange={v => this.props.handleChange('pwd', v)}
             >
-              密码
+              Password:
             </InputItem>
           </List>
           <WhiteSpace />
 
           <Button type="primary" onClick={this.handleLogin}>
-            登录
+            Login
           </Button>
           <WhiteSpace />
           <Button onClick={this.register} type="primary">
-            注册
+            Register
           </Button>
         </WingBlank>
       </div>

@@ -28,7 +28,7 @@ class DashBoard extends React.Component {
         path: '/boss',
         text: 'candidate',
         icon: 'boss',
-        title: '候选人列表',
+        title: 'Candidate List',
         component: Boss,
         hide: user.type === 'candidate'
       },
@@ -36,22 +36,22 @@ class DashBoard extends React.Component {
         path: '/candidate',
         text: 'boss',
         icon: 'job',
-        title: 'BOSS列表',
+        title: 'Boss List',
         component: Candidate,
         hide: user.type === 'boss'
       },
       {
         path: '/msg',
-        text: '消息',
+        text: 'Message',
         icon: 'msg',
-        title: '消息列表',
+        title: 'Message List',
         component: Msg
       },
       {
         path: '/me',
-        text: '我',
+        text: 'Me',
         icon: 'user',
-        title: '个人中心',
+        title: 'User Center',
         component: UserCenter
       }
     ]

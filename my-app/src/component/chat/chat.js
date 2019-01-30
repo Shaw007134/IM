@@ -91,7 +91,7 @@ class Chat extends React.Component {
         </QueueAnim>
         <div className="stick-footer">
           <InputItem
-            placeholder="请输入"
+            placeholder="Say Something..."
             value={this.state.text}
             onChange={v => {
               this.setState({ text: v })
@@ -114,7 +114,7 @@ class Chat extends React.Component {
                     this.handleSubmit()
                   }}
                 >
-                  发送
+                  Send
                 </span>
               </div>
             }

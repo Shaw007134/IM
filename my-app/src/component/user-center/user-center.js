@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Result, List, WhiteSpace, Modal } from 'antd-mobile'
+import { Result, List, WhiteSpace, Modal, Button } from 'antd-mobile'
 import browserCookie from 'browser-cookies'
 import { logoutSubmit } from '../../redux/user.redux'
 import { Redirect } from 'react-router-dom'
@@ -14,12 +14,11 @@ class UserCenter extends React.Component {
     this.logOut = this.logOut.bind(this)
   }
   logOut() {
-    console.log('我被点了')
     const alert = Modal.alert
-    alert('注销', '确认退出登录吗?', [
-      { text: '取消', onPress: () => console.log('cancle') },
+    alert('Logout', 'Confirm to logout?', [
+      { text: 'Cancle', onPress: () => console.log('cancle') },
       {
-        text: '确认',
+        text: 'Confirm',
         onPress: () => {
           browserCookie.erase('userid')
           // window.location.href = window.location.href
@@ -33,7 +32,7 @@ class UserCenter extends React.Component {
     console.log(this.props)
     const Item = List.Item
     const Brief = Item.Brief
-
+    const desc = props.type === 'boss' ? 'Job Description' : 'Personal Profile'
     return props.user ? (
       <div>
         <Result
@@ -47,19 +46,19 @@ class UserCenter extends React.Component {
           title={props.user}
           message={props.type === 'boss' ? props.company : null}
         />
-        <List renderHeader={() => '简介'}>
+        <List renderHeader={() => desc}>
           <Item multipleLine>
             {props.title}
             {props.desc
               ? props.desc.split('\n').map(v => <Brief key={v}>{v}</Brief>)
               : null}
-            {props.salary ? <Brief>薪资：{props.salary}</Brief> : null}
+            {props.salary ? <Brief>Salary：{props.salary}</Brief> : null}
           </Item>
         </List>
         <WhiteSpace />
-        <List>
-          <Item onClick={this.logOut}>退出登录</Item>
-        </List>
+        <Button type="primary" onClick={this.logOut}>
+          Logout
+        </Button>
       </div>
     ) : (
       <Redirect to={props.redirectTo} />

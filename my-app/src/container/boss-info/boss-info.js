@@ -31,22 +31,20 @@ class BossInfo extends React.Component {
         {redirect && redirect !== path ? (
           <Redirect to={this.props.redirectTo} />
         ) : null}
-        <NavBar mode="dark">Boss信息完善页面</NavBar>
+        <NavBar mode="dark">Boss Info</NavBar>
         <AvatarSelector
           selectAvatar={img => {
-            this.setState({
-              avatar: img
-            })
+            this.setState({ avatar: img })
           }}
         />
         <InputItem onChange={v => this.onChange('title', v)}>
-          招聘职位
+          Recruitment Position
         </InputItem>
         <InputItem onChange={v => this.onChange('company', v)}>
-          公司名称
+          Company Name
         </InputItem>
         <InputItem onChange={v => this.onChange('salary', v)}>
-          职位薪资
+          Salary Range
         </InputItem>
         <TextareaItem
           onChange={v => this.onChange('desc', v)}
@@ -61,7 +59,7 @@ class BossInfo extends React.Component {
           }}
           type="primary"
         >
-          保存
+          Save
         </Button>
       </div>
     )
