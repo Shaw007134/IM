@@ -59,6 +59,12 @@ export function sendMsg({ from, to, msg }) {
   }
 }
 
+export function endMsg() {
+  return () => {
+    socket.emit('endmsg')
+  }
+}
+
 export function receiveMsg() {
   console.log(socket)
   return (dispatch, getState) => {

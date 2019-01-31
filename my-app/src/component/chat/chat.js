@@ -1,6 +1,5 @@
 import React from 'react'
 import QueueAnim from 'rc-queue-anim'
-
 import { List, InputItem, NavBar, Icon, Grid } from 'antd-mobile'
 import { connect } from 'react-redux'
 import {
@@ -39,7 +38,6 @@ class Chat extends React.Component {
     }, 0)
   }
   handleSubmit() {
-    console.log('sendmsg')
     const from = this.props.user._id
     const to = this.props.match.params.user
     const msg = this.state.text

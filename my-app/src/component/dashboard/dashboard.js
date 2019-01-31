@@ -16,10 +16,10 @@ import { Route } from 'react-router-dom'
 )
 class DashBoard extends React.Component {
   componentDidMount() {
-    if (!this.props.chat.chatmsg.length) {
-      this.props.getMsgList()
-      this.props.receiveMsg()
-    }
+    // if (!this.props.chat.chatmsg.length) {
+    this.props.getMsgList()
+    // this.props.receiveMsg()
+    // }
   }
   render() {
     const { pathname } = this.props.location

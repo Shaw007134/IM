@@ -4,9 +4,10 @@ import { Result, List, WhiteSpace, Modal, Button } from 'antd-mobile'
 import browserCookie from 'browser-cookies'
 import { logoutSubmit } from '../../redux/user.redux'
 import { Redirect } from 'react-router-dom'
+import {endMsg} from '../../redux/chat.redux'
 @connect(
   state => state.user,
-  { logoutSubmit }
+  { logoutSubmit, endMsg}
 )
 class UserCenter extends React.Component {
   constructor(props) {
@@ -23,13 +24,13 @@ class UserCenter extends React.Component {
           browserCookie.erase('userid')
           // window.location.href = window.location.href
           this.props.logoutSubmit()
+          this.props.endMsg()
         }
       }
     ])
   }
   render() {
     const props = this.props
-    console.log(this.props)
     const Item = List.Item
     const Brief = Item.Brief
     const desc = props.type === 'boss' ? 'Job Description' : 'Personal Profile'

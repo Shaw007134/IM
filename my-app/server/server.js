@@ -18,15 +18,16 @@ io.on('connect', function(socket) {
     const chatid = [from, to].sort().join('_')
     if (to) {
       Chat.create({ chatid, from, to, content: msg }, function(err, doc) {
-        console.log(doc._doc)
+        console.log(doc._doc._id)
         io.emit('recvmsg', Object.assign({}, doc._doc))
       })
     }
   })
 
-  socket.on('disconnect', function() {
+  socket.on('endmsg', function() {
+    console.log('disconnect server')
     socket.removeAllListeners('recvmsg')
-    socket.removeAllListeners('disconnect')
+    socket.removeAllListeners('endmsg')
     io.removeAllListeners('connection')
   })
 })
@@ -40,7 +41,7 @@ app.use(function(req, res, next) {
   }
   return res.sendFile(path.resolve('build/index.html'))
 })
-app.use('/', express.static(path.resolve('build')))
+app.use(express.static(path.resolve('build')))
 server.listen(9000, function() {
   console.log('Node app start at port 9000')
 })
