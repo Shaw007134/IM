@@ -1,7 +1,8 @@
 import React from 'react'
+import QueueAnim from 'rc-queue-anim'
+
 import { List, InputItem, NavBar, Icon, Grid } from 'antd-mobile'
 import { connect } from 'react-redux'
-import QueueAnim from 'rc-queue-anim'
 import {
   sendMsg,
   getMsgList,

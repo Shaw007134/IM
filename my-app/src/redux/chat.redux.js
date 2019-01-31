@@ -60,8 +60,10 @@ export function sendMsg({ from, to, msg }) {
 }
 
 export function receiveMsg() {
+  console.log(socket)
   return (dispatch, getState) => {
     socket.on('recvmsg', function(data) {
+      console.log(socket)
       console.log('recvmsg', data)
       const userid = getState().user._id
       dispatch(msgRecv(data, userid))
@@ -82,7 +84,6 @@ function msgRead({ from, userid, num }) {
 //     }
 //   }
 // }
-
 
 export function readMsg(from) {
   return (dispatch, getState) => {

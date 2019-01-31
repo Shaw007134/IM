@@ -28,7 +28,7 @@ export function user(state = initState, action) {
     case LOAD_DATA:
       return { ...state, ...action.payload }
     case LOGOUT:
-      return {...initState,redirectTo:'/login'}
+      return { ...initState, redirectTo: '/login' }
     default:
       return state
   }
@@ -92,6 +92,6 @@ export function register({ user, pwd, repeatpwd, type }) {
   }
 }
 
-export function logoutSubmit(){
-  return {type: LOGOUT}
+export function logoutSubmit() {
+  return { type: LOGOUT }
 }

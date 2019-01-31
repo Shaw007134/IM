@@ -1,14 +1,15 @@
 import React from 'react'
-import { NavBar } from 'antd-mobile'
-import { Route } from 'react-router-dom'
 import NavLinkBar from '../nav-link/nav-link'
-import { connect } from 'react-redux'
-import { getMsgList, receiveMsg } from '../../redux/chat.redux'
 import Boss from '../boss/boss'
 import Candidate from '../candidate/candidate'
 import UserCenter from '../user-center/user-center'
 import Msg from '../../component/msg/msg'
 import QueueAnim from 'rc-queue-anim'
+import { getMsgList, receiveMsg } from '../../redux/chat.redux'
+import { connect } from 'react-redux'
+import { NavBar } from 'antd-mobile'
+import { Route } from 'react-router-dom'
+
 @connect(
   state => state,
   { getMsgList, receiveMsg }
@@ -56,7 +57,6 @@ class DashBoard extends React.Component {
       }
     ]
     const page = navList.find(v => v.path === pathname)
-    console.log(page)
     return (
       <div>
         <NavBar className="fixd-header" mode="dard">
