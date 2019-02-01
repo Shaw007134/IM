@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 import axios from 'axios'
-const socket = io('ws://localhost:9000')
+let socket
 
 const MSG_LIST = 'MSG_LIST'
 const MSG_RECV = 'MSG_RECV'
@@ -54,23 +54,33 @@ function msgRecv(msg, userid) {
 }
 
 export function sendMsg({ from, to, msg }) {
-  return dispatch => {
+  if (!socket) {
+    socket = io('ws://localhost:9000')
+  }
+  return () => {
     socket.emit('sendmsg', { from, to, msg })
   }
+}
+
+export function loginSocket() {
+  socket = io('ws://localhost:9000')
+  console.log(socket)
 }
 
 export function endMsg() {
   return () => {
     socket.emit('endmsg')
+    socket.disconnect()
   }
 }
 
 export function receiveMsg() {
   console.log(socket)
+  if (!socket) {
+    socket = io('ws://localhost:9000')
+  }
   return (dispatch, getState) => {
     socket.on('recvmsg', function(data) {
-      console.log(socket)
-      console.log('recvmsg', data)
       const userid = getState().user._id
       dispatch(msgRecv(data, userid))
     })

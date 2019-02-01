@@ -1,5 +1,4 @@
 import React from 'react'
-import QueueAnim from 'rc-queue-anim'
 import { List, InputItem, NavBar, Icon, Grid } from 'antd-mobile'
 import { connect } from 'react-redux'
 import {
@@ -21,15 +20,23 @@ class Chat extends React.Component {
     this.state = { text: '', msg: [], showEmoji: false, msgs: [] }
   }
   componentDidMount() {
+    // console.log(this.props.chat.chatmsg.length)
     if (!this.props.chat.chatmsg.length) {
+      //   console.log(this.props.chat.chatmsg.length)
+      //   console.log(this.props.chat.unread)
       this.props.getMsgList()
       this.props.receiveMsg()
     }
-    this.scrollToBottom()
+    console.log(this.props)
+    if (this.props.chat.chatmsg.length > 0) {
+      this.scrollToBottom()
+    }
     this.fixCarousel()
   }
   componentDidUpdate() {
-    this.scrollToBottom()
+    if (this.props.chat.chatmsg.length > 0) {
+      this.scrollToBottom()
+    }
   }
   componentWillUnmount() {
     const to = this.props.match.params.user

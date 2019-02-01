@@ -3,7 +3,8 @@ import Logo from '../../component/logo/logo'
 import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { login } from '../../redux/user.redux'
+import { login, loginRegister } from '../../redux/user.redux'
+import { loginSocket } from '../../redux/chat.redux'
 import Wrapper from '../../component/wrapper/wrapper'
 
 //高阶组件，本质是接收一个组件作为参数，返回一个基于传入的组件新构建的组件的函数
@@ -56,7 +57,7 @@ import Wrapper from '../../component/wrapper/wrapper'
 
 @connect(
   state => state.user,
-  { login }
+  { login, loginRegister }
 )
 @Wrapper
 class Login extends React.Component {
@@ -68,9 +69,11 @@ class Login extends React.Component {
   register() {
     console.log(this.props)
     this.props.history.push('/register')
+    this.props.loginRegister(this.props.state)
   }
   handleLogin() {
     this.props.login(this.props.state)
+    loginSocket()
   }
   render() {
     return (

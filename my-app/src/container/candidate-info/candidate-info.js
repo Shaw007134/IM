@@ -25,7 +25,7 @@ class CandidateInfo extends React.Component {
     const path = this.props.location.pathname
     const redirect = this.props.redirectTo
     return (
-      <div>
+      <div id="info-page">
         {redirect && redirect !== path ? (
           <Redirect to={this.props.redirectTo} />
         ) : null}
@@ -35,12 +35,12 @@ class CandidateInfo extends React.Component {
             this.setState({ avatar: img })
           }}
         />
-        <InputItem onChange={v => this.onChange('title', v)}>
+        <InputItem id="target" onChange={v => this.onChange('title', v)}>
           Career Objective
         </InputItem>
         <TextareaItem
           onChange={v => this.onChange('desc', v)}
-          rows={3}
+          rows={5}
           autoHeight
           title="Personal Profile"
         />

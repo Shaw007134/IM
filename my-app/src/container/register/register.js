@@ -35,9 +35,9 @@ class Register extends React.Component {
   componentDidMount() {
     this.props.handleChange('type', 'candidate')
   }
-  handleRegister() {
+  handleRegister = () => {
+    console.log(this.props)
     this.props.register(this.props.state)
-    console.log(this.props.state)
   }
   render() {
     return (
@@ -45,7 +45,7 @@ class Register extends React.Component {
         {this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : null}
         <Logo />
         <WingBlank>
-          <List>
+          <List id="register">
             {this.props.msg ? (
               <p className="error-msg">{this.props.msg}</p>
             ) : null}

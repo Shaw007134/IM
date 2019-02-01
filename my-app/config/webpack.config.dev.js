@@ -9,6 +9,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter')
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin')
 const getClientEnvironment = require('./env')
 const paths = require('./paths')
+const theme = require('../package.json').theme
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -143,7 +144,7 @@ module.exports = {
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
               // directory for faster rebuilds.
-              cacheDirectory: true,
+              cacheDirectory: true
             }
           },
 
@@ -220,6 +221,7 @@ module.exports = {
               }
             ]
           },
+
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
           // In production, they would get copied to the `build` folder.

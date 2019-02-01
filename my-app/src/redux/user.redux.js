@@ -6,6 +6,7 @@ const AUTH_SUCCESS = 'AUTH_SUCCESS'
 const ERROR_MSG = 'ERROR_MSG'
 const LOAD_DATA = 'LOAD_DATA'
 const LOGOUT = 'LOGOUT'
+const REGSIGER = 'REGSIGER'
 const initState = {
   redirectTo: '',
   msg: '',
@@ -29,6 +30,8 @@ export function user(state = initState, action) {
       return { ...state, ...action.payload }
     case LOGOUT:
       return { ...initState, redirectTo: '/login' }
+    case REGSIGER:
+      return { ...state, redirectTo: '/register' }
     default:
       return state
   }
@@ -47,11 +50,28 @@ export function loadData(userinfo) {
   return { type: LOAD_DATA, payload: userinfo }
 }
 
+export function userInfo() {
+  return dispatch => {
+    axios.get('/user/info').then(res => {
+      if (res.status === 200) {
+        if (res.data.code === 0) {
+          dispatch(loadData(res.data.data))
+        } else {
+          dispatch(errorMsg(res.data.msg))
+        }
+      }
+    })
+  }
+}
+
 export function update(data) {
   return dispatch => {
     axios.post('/user/update', data).then(res => {
+      console.log(res)
       if (res.status === 200 && res.data.code === 0) {
-        dispatch(authSuccess(res.data.data))
+        // dispatch(authSuccess(res.data.data))
+        dispatch({ type: LOGOUT })
+        console.log('dispatch logout')
       } else {
         dispatch(errorMsg(res.data.msg))
       }
@@ -74,7 +94,12 @@ export function login({ user, pwd }) {
   }
 }
 
+export function loginRegister() {
+  return { type: REGSIGER }
+}
+
 export function register({ user, pwd, repeatpwd, type }) {
+  console.log(user)
   if (!user || !pwd || !type) {
     return errorMsg('用户名密码必须输入')
   }
@@ -83,6 +108,7 @@ export function register({ user, pwd, repeatpwd, type }) {
   }
   return dispatch => {
     axios.post('/user/register', { user, pwd, type }).then(res => {
+      console.log(res)
       if (res.status === 200 && res.data.code === 0) {
         dispatch(authSuccess({ user, pwd, type }))
       } else {
@@ -92,6 +118,12 @@ export function register({ user, pwd, repeatpwd, type }) {
   }
 }
 
+export function clearAll() {
+  console.log('clear all')
+  return {
+    type: 'CLEARALL'
+  }
+}
 export function logoutSubmit() {
   return { type: LOGOUT }
 }

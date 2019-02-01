@@ -6,19 +6,25 @@ import UserCenter from '../user-center/user-center'
 import Msg from '../../component/msg/msg'
 import QueueAnim from 'rc-queue-anim'
 import { getMsgList, receiveMsg } from '../../redux/chat.redux'
+import { userInfo } from '../../redux/user.redux'
 import { connect } from 'react-redux'
 import { NavBar } from 'antd-mobile'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 
 @connect(
   state => state,
-  { getMsgList, receiveMsg }
+  { getMsgList, receiveMsg, userInfo }
 )
 class DashBoard extends React.Component {
   componentDidMount() {
     if (!this.props.chat.chatmsg.length) {
       this.props.getMsgList()
       this.props.receiveMsg()
+      console.log(this.props)
+    }
+    if (!this.props.user.user) {
+      this.props.userInfo()
+      console.log(this.props)
     }
   }
   render() {
@@ -59,6 +65,7 @@ class DashBoard extends React.Component {
     const page = navList.find(v => v.path === pathname)
     return (
       <div>
+        {!page ? <Redirect to={this.props.redirectTo} /> : null}
         <NavBar className="fixd-header" mode="dard">
           {navList.find(v => v.path === pathname).title}
         </NavBar>

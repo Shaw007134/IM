@@ -18,7 +18,6 @@ io.on('connect', function(socket) {
     const chatid = [from, to].sort().join('_')
     if (to) {
       Chat.create({ chatid, from, to, content: msg }, function(err, doc) {
-        console.log(doc._doc._id)
         io.emit('recvmsg', Object.assign({}, doc._doc))
       })
     }
@@ -28,6 +27,7 @@ io.on('connect', function(socket) {
     console.log('disconnect server')
     socket.removeAllListeners('recvmsg')
     socket.removeAllListeners('endmsg')
+    socket.disconnect()
     io.removeAllListeners('connection')
   })
 })
@@ -39,6 +39,7 @@ app.use(function(req, res, next) {
   if (req.url.startsWith('/user/') || req.url.startsWith('/static')) {
     return next()
   }
+  console.log(req.url)
   return res.sendFile(path.resolve('build/index.html'))
 })
 app.use(express.static(path.resolve('build')))

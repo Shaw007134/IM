@@ -2,19 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Result, List, WhiteSpace, Modal, Button } from 'antd-mobile'
 import browserCookie from 'browser-cookies'
-import { logoutSubmit } from '../../redux/user.redux'
+import { logoutSubmit, clearAll } from '../../redux/user.redux'
 import { Redirect } from 'react-router-dom'
-import {endMsg} from '../../redux/chat.redux'
+import { endMsg } from '../../redux/chat.redux'
+
 @connect(
-  state => state.user,
-  { logoutSubmit, endMsg}
+  state => state,
+  { logoutSubmit, endMsg, clearAll }
 )
 class UserCenter extends React.Component {
-  constructor(props) {
-    super(props)
-    this.logOut = this.logOut.bind(this)
-  }
-  logOut() {
+  logOut = () => {
     const alert = Modal.alert
     alert('Logout', 'Confirm to logout?', [
       { text: 'Cancle', onPress: () => console.log('cancle') },
@@ -23,17 +20,19 @@ class UserCenter extends React.Component {
         onPress: () => {
           browserCookie.erase('userid')
           // window.location.href = window.location.href
-          this.props.logoutSubmit()
           this.props.endMsg()
+          this.props.clearAll()
+          this.props.logoutSubmit()
         }
       }
     ])
   }
   render() {
-    const props = this.props
+    const props = this.props.user
     const Item = List.Item
     const Brief = Item.Brief
     const desc = props.type === 'boss' ? 'Job Description' : 'Personal Profile'
+    console.log(this.props)
     return props.user ? (
       <div>
         <Result

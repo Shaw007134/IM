@@ -35,8 +35,8 @@ ReactDom.render(
           <Route path="/" exact component={Login} />
           <Route path="/boss/info" component={BossInfo} />
           <Route path="/candidate/info" component={CandidateInfo} />
-          <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
           <Route path="/chat/:user" component={Chat} />
           <Route component={DashBoard} />
         </Switch>

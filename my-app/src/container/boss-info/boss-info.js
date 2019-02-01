@@ -27,7 +27,7 @@ class BossInfo extends React.Component {
     const path = this.props.location.pathname
     const redirect = this.props.redirectTo
     return (
-      <div>
+      <div id="info-page">
         {redirect && redirect !== path ? (
           <Redirect to={this.props.redirectTo} />
         ) : null}
@@ -37,9 +37,7 @@ class BossInfo extends React.Component {
             this.setState({ avatar: img })
           }}
         />
-        <InputItem onChange={v => this.onChange('title', v)}>
-          Recruitment Position
-        </InputItem>
+        <InputItem onChange={v => this.onChange('title', v)}>Hiring</InputItem>
         <InputItem onChange={v => this.onChange('company', v)}>
           Company Name
         </InputItem>
@@ -48,9 +46,9 @@ class BossInfo extends React.Component {
         </InputItem>
         <TextareaItem
           onChange={v => this.onChange('desc', v)}
-          rows={3}
+          rows={5}
           autoHeight
-          title="职位要求"
+          title="Job Description"
         />
         <Button
           onClick={() => {
