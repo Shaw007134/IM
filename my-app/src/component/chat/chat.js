@@ -18,18 +18,25 @@ class Chat extends React.Component {
   constructor(props) {
     super(props)
     this.fixCarousel = this.fixCarousel.bind(this)
-    this.state = { text: '', msg: [], showEmoji: false }
+    this.state = { text: '', msg: [], showEmoji: false, msgs: [] }
   }
   componentDidMount() {
     if (!this.props.chat.chatmsg.length) {
       this.props.getMsgList()
       this.props.receiveMsg()
     }
+    this.scrollToBottom()
     this.fixCarousel()
+  }
+  componentDidUpdate() {
+    this.scrollToBottom()
   }
   componentWillUnmount() {
     const to = this.props.match.params.user
     this.props.readMsg(to)
+  }
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: 'smooth' })
   }
   fixCarousel() {
     let timer = setTimeout(() => {
@@ -50,15 +57,14 @@ class Chat extends React.Component {
       .split(' ')
       .filter(v => v)
       .map(v => ({ text: v }))
-    const userid = this.props.match.params.user
     const Item = List.Item
     const users = this.props.chat.users
+    const userid = this.props.match.params.user
+    const chatid = getChatId(userid, this.props.user._id)
+    const chatmsgs = this.props.chat.chatmsg.filter(v => v.chatid === chatid)
     if (!users[userid]) {
       return null
     }
-    const chatid = getChatId(userid, this.props.user._id)
-    const chatmsgs = this.props.chat.chatmsg.filter(v => v.chatid === chatid)
-
     return (
       <div id="chat-page">
         <NavBar
@@ -67,10 +73,11 @@ class Chat extends React.Component {
             this.props.history.goBack()
           }}
           mode="dark"
+          className="stick-header"
         >
           {users[userid].name}
         </NavBar>
-        <QueueAnim type="right" delay={100}>
+        <div id="chatmsg-anim">
           {chatmsgs.map(v => {
             const avatar = require(`../../assets/avatar/${
               users[v.from].avatar
@@ -87,7 +94,13 @@ class Chat extends React.Component {
               </List>
             )
           })}
-        </QueueAnim>
+          <div
+            style={{ float: 'left', clear: 'both' }}
+            ref={el => {
+              this.messagesEnd = el
+            }}
+          />
+        </div>
         <div className="stick-footer">
           <InputItem
             placeholder="Say Something..."
@@ -99,9 +112,7 @@ class Chat extends React.Component {
               <div>
                 <span
                   onClick={() => {
-                    this.setState({
-                      showEmoji: !this.state.showEmoji
-                    })
+                    this.setState({ showEmoji: !this.state.showEmoji })
                     this.fixCarousel()
                   }}
                   style={{ marginRight: 5 }}
@@ -117,10 +128,8 @@ class Chat extends React.Component {
                 </span>
               </div>
             }
-            // onExtraClick={e => {
-            //   this.handleSubmit()
-            // }}
           />
+
           {this.state.showEmoji ? (
             <Grid
               data={emoji}
@@ -128,9 +137,7 @@ class Chat extends React.Component {
               carouselMaxRow={4}
               isCarousel={true}
               onClick={el => {
-                this.setState({
-                  text: this.state.text + el.text
-                })
+                this.setState({ text: this.state.text + el.text })
                 console.log(el)
               }}
             />
@@ -140,5 +147,4 @@ class Chat extends React.Component {
     )
   }
 }
-
 export default Chat

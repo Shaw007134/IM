@@ -44,7 +44,19 @@
   padding: 2px 0;
 }
 
-#chat-page .stick-footer .am-input-extra span {
+#chat-page #chatmsg-anim {
+  overflow: auto;
+  position: absolute;
+  top: 45px;
+  bottom: 45px;
+  width: 100%;
+}
+
+.stick-header {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .stick-footer {
