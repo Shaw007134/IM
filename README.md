@@ -21,7 +21,9 @@ This app use the NoSQL database to store the users' infos and chat histories, an
 
 ##### Preview
 
-More details, please click 👉  [here](http://47.104.228.220:9000/#/recommend) for online preview.
+More details, please click 👉  [here](http://47.104.228.220:9001/login) for online preview.
+
+you can test react / GM etc, pwd: 123
 
 ![Demo](./IM-React.gif)
 
