@@ -73,7 +73,7 @@ export function endMsg() {
 
 export function receiveMsg() {
   if (!socket) {
-    socket = io('ws://localhost:9000')
+    socket = io('ws://localhost:9001')
   }
   return (dispatch, getState) => {
     socket.on('recvmsg', function(data) {
