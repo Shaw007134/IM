@@ -37,7 +37,7 @@ you can test react / GM etc, pwd: 123
 
 - [x] React, Redux, React-Router and create-react-app (webpack)
 
-  ---- Redux:  
+  - Redux:  
 
   ​	combineReducers -- combine different reducers
 
@@ -51,51 +51,52 @@ you can test react / GM etc, pwd: 123
 
   
 
-  ---- React Router: 
+  - React Router: 
 
-  ​	BrowserRouter -- use the HTML5 history API (pushState/replaceState/popstate) to keep the UI in sync with URL
+    ​	BrowserRouter -- use the HTML5 history API (pushState/replaceState/popstate) to keep the UI in sync with URL
 
-  ​	Redirect -- Rendering a Redirect to navigate to a new location. the new location will override the current location in the history stack.
+    ​	Redirect -- Rendering a Redirect to navigate to a new location. the new location will override the current location in the history stack.
 
-  ​	Route -- Render the specific UI when a location matches the router's path
+    ​	Route -- Render the specific UI when a location matches the router's path
 
-  ​	Switch -- Render the first child <Route> or <Redirect> that matches the location
+    ​	Switch -- Render the first child <Route> or <Redirect> that matches the location
 
-  ​	history -- history objects methods such as push / replace / goBack.
+    ​	history -- history objects methods such as push / replace / goBack.
 
-  ​	location -- represents where the app is now
+    ​	location -- represents where the app is now
 
-  ​	match -- can be accessed from Route / WithRouter components
+    ​	match -- can be accessed from Route / WithRouter components
 
-  ​	WithRouter -- is a higher-order component, let the wrapped component get access to the history object's properties and the closet <Route>'s match
+    ​	WithRouter -- is a higher-order component, let the wrapped component get access to the history object's properties and the closet <Route>'s match
 
    
 
 - [x] Express
 
-  ---- connect socket with express
+  -  connect socket with express
 
-  ​	`const server = require('http').Server(app)`
+    `const server = require('http').Server(app)`
 
   ​	`const io = require('socket.io')(server)`
 
-  ---- configure route
+  - configure route
 
   ​	`app.use(express.static(path.resolve('build')))`
 
 - [x] MongoDB
 
-  ---- create model
+  - create model
 
   ​	`mongoose.model(m, new mongoose.Schema(models[m]))`
 
-  ----find element
+  - find element
+
 
   ​	`find({}) / find($or:[{},{}])`
 
   ​	`findByIdAndUpdate / findOne`
 
-  ---- update
+  - update
 
   ​	`update({},{$set :{ }},{multi: true})`
 
@@ -140,7 +141,7 @@ you can test react / GM etc, pwd: 123
 
 ##### 
 
-##### Difficulties encountered 
+#### Difficulties encountered 
 
 ```
 1. redux async management
