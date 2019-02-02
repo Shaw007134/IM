@@ -10,8 +10,9 @@ const REGSIGER = 'REGSIGER'
 const initState = {
   redirectTo: '',
   msg: '',
-  user: '',
-  type: ''
+  user: undefined,
+  type: '',
+  isAuth: false
 }
 
 // reducer
@@ -21,13 +22,14 @@ export function user(state = initState, action) {
       return {
         ...state,
         msg: '',
+        isAuth: true,
         redirectTo: getRedirectPath(action.payload),
         ...action.payload
       }
     case ERROR_MSG:
       return { ...state, msg: action.msg, isAuth: false }
     case LOAD_DATA:
-      return { ...state, ...action.payload }
+      return { ...state, ...action.payload, isAuth: true }
     case LOGOUT:
       return { ...initState, redirectTo: '/login' }
     case REGSIGER:
@@ -50,19 +52,23 @@ export function loadData(userinfo) {
   return { type: LOAD_DATA, payload: userinfo }
 }
 
-export function userInfo() {
+export function userInfo(data) {
   return dispatch => {
-    axios.get('/user/info').then(res => {
-      if (res.status === 200) {
-        if (res.data.code === 0) {
-          dispatch(loadData(res.data.data))
-        } else {
-          dispatch(errorMsg(res.data.msg))
-        }
-      }
-    })
+    dispatch(loadData(data))
   }
 }
+
+// export function getUserInfo() {
+//   return dispatch => {
+//     axios.get('/user/info').then(response => {
+//       let res = response.data
+//       console.log(res)
+//       if (response.status === 200 && res.code === 0) {
+//         dispatch(loadData(res.data))
+//       }
+//     })
+//   }
+// }
 
 export function update(data) {
   return dispatch => {
@@ -70,7 +76,8 @@ export function update(data) {
       console.log(res)
       if (res.status === 200 && res.data.code === 0) {
         // dispatch(authSuccess(res.data.data))
-        dispatch({ type: LOGOUT })
+        dispatch(clearAll())
+        dispatch(logoutSubmit())
         console.log('dispatch logout')
       } else {
         dispatch(errorMsg(res.data.msg))

@@ -102,6 +102,7 @@ Router.get('/info', (req, res) => {
       return res.json({ code: 1, msg: '服务器错误' })
     }
     if (doc) {
+      console.log('info')
       return res.json({ code: 0, data: doc })
     }
   })

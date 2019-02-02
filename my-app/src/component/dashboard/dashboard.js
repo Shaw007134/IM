@@ -6,26 +6,25 @@ import UserCenter from '../user-center/user-center'
 import Msg from '../../component/msg/msg'
 import QueueAnim from 'rc-queue-anim'
 import { getMsgList, receiveMsg } from '../../redux/chat.redux'
-import { userInfo } from '../../redux/user.redux'
 import { connect } from 'react-redux'
 import { NavBar } from 'antd-mobile'
 import { Route, Redirect } from 'react-router-dom'
+// import { getUserInfo } from '../../redux/user.redux'
 
 @connect(
   state => state,
-  { getMsgList, receiveMsg, userInfo }
+  { getMsgList, receiveMsg }
 )
 class DashBoard extends React.Component {
   componentDidMount() {
     if (!this.props.chat.chatmsg.length) {
       this.props.getMsgList()
       this.props.receiveMsg()
-      console.log(this.props)
     }
-    if (!this.props.user.user) {
-      this.props.userInfo()
-      console.log(this.props)
-    }
+    // console.log(this.props.user.user)
+    // if (!this.props.user.user) {
+    //   this.props.getUserInfo()
+    // }
   }
   render() {
     const { pathname } = this.props.location

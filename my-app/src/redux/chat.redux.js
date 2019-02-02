@@ -54,8 +54,10 @@ function msgRecv(msg, userid) {
 }
 
 export function sendMsg({ from, to, msg }) {
+  console.log('sendmsg')
   if (!socket) {
     socket = io('ws://localhost:9000')
+    console.log(socket)
   }
   return () => {
     socket.emit('sendmsg', { from, to, msg })
@@ -63,6 +65,7 @@ export function sendMsg({ from, to, msg }) {
 }
 
 export function loginSocket() {
+  console.log('login')
   socket = io('ws://localhost:9000')
   console.log(socket)
 }
@@ -75,9 +78,10 @@ export function endMsg() {
 }
 
 export function receiveMsg() {
-  console.log(socket)
+  console.log('receivemsg')
   if (!socket) {
     socket = io('ws://localhost:9000')
+    console.log(socket)
   }
   return (dispatch, getState) => {
     socket.on('recvmsg', function(data) {

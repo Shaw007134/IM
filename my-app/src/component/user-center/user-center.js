@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom'
 import { endMsg } from '../../redux/chat.redux'
 
 @connect(
-  state => state,
+  state => state.user,
   { logoutSubmit, endMsg, clearAll }
 )
 class UserCenter extends React.Component {
@@ -28,12 +28,10 @@ class UserCenter extends React.Component {
     ])
   }
   render() {
-    const props = this.props.user
+    const props = this.props
     const Item = List.Item
     const Brief = Item.Brief
-    const desc = props.type === 'boss' ? 'Job Description' : 'Personal Profile'
-    console.log(this.props)
-    return props.user ? (
+    return this.props.user ? (
       <div>
         <Result
           img={
@@ -46,7 +44,11 @@ class UserCenter extends React.Component {
           title={props.user}
           message={props.type === 'boss' ? props.company : null}
         />
-        <List renderHeader={() => desc}>
+        <List
+          renderHeader={() =>
+            props.type === 'boss' ? 'Job Description' : 'Personal Profile'
+          }
+        >
           <Item multipleLine>
             {props.title}
             {props.desc
@@ -60,8 +62,9 @@ class UserCenter extends React.Component {
           Logout
         </Button>
       </div>
-    ) : (
-      <Redirect to={props.redirectTo} />
+    ) 
+    : (
+      <Redirect to={this.props.redirectTo} />
     )
   }
 }

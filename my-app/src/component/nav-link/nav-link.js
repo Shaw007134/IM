@@ -10,23 +10,25 @@ class NavLinkBar extends React.Component {
     const navList = this.props.data.filter(v => !v.hide)
     const { pathname } = this.props.location
     return (
-      <TabBar>
-        {navList.map(v => (
-          <TabBar.Item
-            badge={v.path === '/msg' ? this.props.unread : 0}
-            key={v.path}
-            title={v.text}
-            icon={{ uri: require(`../../assets/nav/${v.icon}.png`) }}
-            selectedIcon={{
-              uri: require(`../../assets/nav/${v.icon}-active.png`)
-            }}
-            selected={pathname === v.path}
-            onPress={() => {
-              this.props.history.push(v.path)
-            }}
-          />
-        ))}
-      </TabBar>
+      <div id="nav-link">
+        <TabBar>
+          {navList.map(v => (
+            <TabBar.Item
+              badge={v.path === '/msg' ? this.props.unread : 0}
+              key={v.path}
+              title={v.text}
+              icon={{ uri: require(`../../assets/nav/${v.icon}.png`) }}
+              selectedIcon={{
+                uri: require(`../../assets/nav/${v.icon}-active.png`)
+              }}
+              selected={pathname === v.path}
+              onPress={() => {
+                this.props.history.push(v.path)
+              }}
+            />
+          ))}
+        </TabBar>
+      </div>
     )
   }
 }
