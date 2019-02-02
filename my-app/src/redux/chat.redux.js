@@ -64,12 +64,6 @@ export function sendMsg({ from, to, msg }) {
   }
 }
 
-export function loginSocket() {
-  console.log('login')
-  socket = io('ws://localhost:9000')
-  console.log(socket)
-}
-
 export function endMsg() {
   return () => {
     socket.emit('endmsg')
@@ -78,10 +72,8 @@ export function endMsg() {
 }
 
 export function receiveMsg() {
-  console.log('receivemsg')
   if (!socket) {
     socket = io('ws://localhost:9000')
-    console.log(socket)
   }
   return (dispatch, getState) => {
     socket.on('recvmsg', function(data) {

@@ -20,14 +20,10 @@ class Chat extends React.Component {
     this.state = { text: '', msg: [], showEmoji: false, msgs: [] }
   }
   componentDidMount() {
-    // console.log(this.props.chat.chatmsg.length)
     if (!this.props.chat.chatmsg.length) {
-      //   console.log(this.props.chat.chatmsg.length)
-      //   console.log(this.props.chat.unread)
       this.props.getMsgList()
       this.props.receiveMsg()
     }
-    console.log(this.props)
     if (this.props.chat.chatmsg.length > 0) {
       this.scrollToBottom()
     }

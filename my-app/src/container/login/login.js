@@ -4,7 +4,6 @@ import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { login, loginRegister } from '../../redux/user.redux'
-import { loginSocket } from '../../redux/chat.redux'
 import Wrapper from '../../component/wrapper/wrapper'
 
 //高阶组件，本质是接收一个组件作为参数，返回一个基于传入的组件新构建的组件的函数
@@ -73,7 +72,6 @@ class Login extends React.Component {
   }
   handleLogin() {
     this.props.login(this.props.state)
-    loginSocket()
   }
   render() {
     return (
