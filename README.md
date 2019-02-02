@@ -4,8 +4,6 @@
 
  [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-[TOC]
-
 #### Intro
 
 An Instant messaging application made with React.js(React-Router4/Redux), Node.js(Express), MongoDB and Socket.io, learning purpose.
@@ -69,7 +67,7 @@ you can test react / GM etc, pwd: 123
 
     ​	match -- can be accessed from Route / WithRouter components
 
-  ​	WithRouter -- is a higher-order component, let the wrapped component get access to the history object's properties and the closet <Route>'s match
+    ​	WithRouter -- is a higher-order component, let the wrapped component get access to the history object's properties and the closet <Route>'s match
 
    
 
