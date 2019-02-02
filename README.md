@@ -2,22 +2,20 @@
 
 ------
 
-  [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+ [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ##### Intro
 
-A Music Player made with Vue, learning purpose.
+An Instant messaging application made with React.js(React-Router4/Redux), Node.js(Express), MongoDB and Socket.io, learning purpose.
 
-This player get the online music data from the API of QQ Music, and It has the following features:
+This app use the NoSQL database to store the users' infos and chat histories, and It has the following features:
 
-- Browse Songs, Albums, Artists and Top lists
-- Create and edit playlists
-- Three different play modes - Sequence / Random / Loop
-- Lyric support
-- Search support
-- Cache, save playing history and search history
-
-
+- Support instant chat, multiple users
+- Unread messages hint
+- Emoji support
+- Enhanced md5 encryption
+- Antd-mobile and motion Antd-mobile
+- Auto scroll to latest message
 
 ##### 
 
@@ -25,7 +23,7 @@ This player get the online music data from the API of QQ Music, and It has the f
 
 More details, please click 👉  [here](http://47.104.228.220:9000/#/recommend) for online preview.
 
-![Demo]()
+![Demo](./IM-React.gif)
 
 
 
@@ -33,57 +31,108 @@ More details, please click 👉  [here](http://47.104.228.220:9000/#/recommend) 
 
 ##### Libraries and tools used in the project
 
-- [x] ES6 / CSS3
+- [x] ES6
 
-- [x] Vue, Vuex, Vue Router and Vue-CLI (webpack)
+- [x] React, Redux, React-Router and create-react-app (webpack)
 
-  ---- Vuex: manage the states, share states from different components, mutations and actions to modify states.
+  ---- Redux:  
 
-  ---- Vue Router: use router push, router to, router-link to implement the page jumping. 
+  ​	combineReducers -- combine different reducers
 
-- [x] Lyric-Parser and BetterScroll
+  ​	compose -- compose the middlewares etc...(from right to left)
 
-  ---- handle the scroll module
+  ​	createStore -- create store with combined reducers and composed middlewares(enhancer).
 
-- [x] JSONP / AXIOS
+  ​	provider -- provide the store to the components
 
-  ---- handle http requests and CORS
+  ​	applyMiddleware -- mostly, apply the middlewares such as thunk to support asynchronous actions.
 
-- [x] Node.js and Express
+  
 
-  ---- Build the server in the cloud
+  ---- React Router: 
 
-- [x] Mixin, Debounce and Code spliting
+  ​	BrowserRouter -- use the HTML5 history API (pushState/replaceState/popstate) to keep the UI in sync with URL
 
-  ---- use scss mixin and vue mixin to improve component availability 
+  ​	Redirect -- Rendering a Redirect to navigate to a new location. the new location will override the current location in the history stack.
 
-  ---- use debounce to save the number of requests.
+  ​	Route -- Render the specific UI when a location matches the router's path
+
+  ​	Switch -- Render the first child <Route> or <Redirect> that matches the location
+
+  ​	history -- history objects methods such as push / replace / goBack.
+
+  ​	location -- represents where the app is now
+
+  ​	match -- can be accessed from Route / WithRouter components
+
+  ​	WithRouter -- is a higher-order component, let the wrapped component get access to the history object's properties and the closet <Route>'s match
+
+   
+
+- [x] Express
+
+  ---- connect socket with express
+
+  ​	`const server = require('http').Server(app)`
+
+  ​	`const io = require('socket.io')(server)`
+
+  ---- configure route
+
+  ​	`app.use(express.static(path.resolve('build')))`
+
+- [x] MongoDB
+
+  ---- create model
+
+  ​	`mongoose.model(m, new mongoose.Schema(models[m]))`
+
+  ----find element
+
+  ​	`find({}) / find($or:[{},{}])`
+
+  ​	`findByIdAndUpdate / findOne`
+
+  ---- update
+
+  ​	`update({},{$set :{ }},{multi: true})`
+
+- [x] Socket.io
+
+  ​	`io.on('connect') / io.emit() `
+
+  ​	`socket.on() / socket.emit() / socket.once()`
+
+  ​	`socket.connect() / socket.disconnect() / socket.removeAllListeners()`
 
 ##### 
 
 ##### UI
 
-- Suggest
-  - Slider
-  - Disc (suggested albums)
-- Singer
-  - Singer details
-  - Music list
-- Top List
-  - ranking 
-- Search
-  - Hot Key
-  - Search Result / Search History
-- Player 
-  - Progress bar / Progress circle
-  - Lyric / Disk
+- Login
+  - Logo
+  - Login / Register
+- Register
+  - User info
+  - Details
+- Dashboard
+  - Top Banner
+  - boss list / candidate list
+  - message list
+  - me (user center)
+  - NavLinkBar
+- Boss / Candidate List
+  - User Card
+- Message List
+  - List Item
+  - Badge
 - User Center
-  - Play history
-  - Favorite List
+  - Job Description / Personal Portfolio
+  - Logout
 
 
 
-![structure](C:/Users/Shaw/Documents/Music-Player-Vue/PureMusic/structure.png)
+![structure](./Structure.png)
 
 
 
@@ -92,29 +141,29 @@ More details, please click 👉  [here](http://47.104.228.220:9000/#/recommend) 
 ##### Difficulties encountered 
 
 ```
-1. v-for refs
-refs is not reactive, and v-for is in-patch insert
+1. redux async management
+use the thunk middleware
 
-2. webpack.dev.config
-webpack uses express as default
-insert app.use in before
+2. antd mobile config
+.babelrc need to set 
+modify the package.json also
 
-3. audio play error
-should handle Promise
+3. socket emit multiple times
+each socket.on will be triggered by io.emit
 
-4. Constructor
-base components only handle basic things
-like new a class or emit an event
+4. unread message nums
+trigger read based on from / to is the current userid
+call recvmsgs actions once display to calculate unread nums
 
-5. Vuex mutate state
-array should use slice() to make a copy
+5. auto scroll to the last element
+add a div in the bottom of the list
+use the scrollIntoView
 
 6. Make proper data structure
-maintain the playlist and sequencelist
-handle edge cases always
-set flag and watch proper data
+understand what should be props and states
+message set to proper group
 
-7. scroll
-should recalculate the clientHeight after dom change, or use the this.$nextTick
+7. performance best practise
+use gzip, for express, can simplely use the compression middleware
 ```
 
