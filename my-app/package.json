@@ -71,7 +71,7 @@
     "extends": "react-app"
   },
   "proxy": [
-    "http://localhost:9000"
+    "http://localhost:9001"
   ],
   "devDependencies": {
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
