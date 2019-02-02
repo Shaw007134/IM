@@ -56,7 +56,7 @@ function msgRecv(msg, userid) {
 export function sendMsg({ from, to, msg }) {
   console.log('sendmsg')
   if (!socket) {
-    socket = io('ws://localhost:9000')
+    socket = io('ws://localhost:9001')
     console.log(socket)
   }
   return () => {

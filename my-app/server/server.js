@@ -46,3 +46,19 @@ app.use(express.static(path.resolve('build')))
 server.listen(9001, function() {
   console.log('Node app start at port 9001')
 })
+
+// 5 app.get('*.js', function (req, res, next) {
+//   46  req.url = req.url + '.gz';
+//   47  res.set('Content-Encoding', 'gzip');
+//   48  res.set('Content-Type', 'text/javascript');
+//   49  next();
+//   50
+// });
+// 51
+// 52 app.get('*.css', function (req, res, next) {
+//   53  req.url = req.url + '.gz';
+//   54  res.set('Content-Encoding', 'gzip');
+//   55  res.set('Content-Type', 'text/css');
+//   56  next();
+//   57
+// });
