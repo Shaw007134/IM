@@ -4,7 +4,9 @@
 
  [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-##### Intro
+[TOC]
+
+#### Intro
 
 An Instant messaging application made with React.js(React-Router4/Redux), Node.js(Express), MongoDB and Socket.io, learning purpose.
 
@@ -19,7 +21,7 @@ This app use the NoSQL database to store the users' infos and chat histories, an
 
 ##### 
 
-##### Preview
+#### Preview
 
 More details, please click 👉  [here](http://47.104.228.220:9001/login) for online preview.
 
@@ -31,7 +33,7 @@ you can test react / GM etc, pwd: 123
 
 #####
 
-##### Libraries and tools used in the project
+#### Libraries and tools used in the project
 
 - [x] ES6
 
@@ -39,15 +41,15 @@ you can test react / GM etc, pwd: 123
 
   - Redux:  
 
-  ​	combineReducers -- combine different reducers
+    ​	combineReducers -- combine different reducers
 
-  ​	compose -- compose the middlewares etc...(from right to left)
+    ​	compose -- compose the middlewares etc...(from right to left)
 
-  ​	createStore -- create store with combined reducers and composed middlewares(enhancer).
+    ​	createStore -- create store with combined reducers and composed middlewares(enhancer).
 
-  ​	provider -- provide the store to the components
+    ​	provider -- provide the store to the components
 
-  ​	applyMiddleware -- mostly, apply the middlewares such as thunk to support asynchronous actions.
+    ​	applyMiddleware -- mostly, apply the middlewares such as thunk to support asynchronous actions.
 
   
 
@@ -67,7 +69,7 @@ you can test react / GM etc, pwd: 123
 
     ​	match -- can be accessed from Route / WithRouter components
 
-    ​	WithRouter -- is a higher-order component, let the wrapped component get access to the history object's properties and the closet <Route>'s match
+  ​	WithRouter -- is a higher-order component, let the wrapped component get access to the history object's properties and the closet <Route>'s match
 
    
 
@@ -75,42 +77,41 @@ you can test react / GM etc, pwd: 123
 
   -  connect socket with express
 
-    `const server = require('http').Server(app)`
+    ​	`const server = require('http').Server(app)`
 
-  ​	`const io = require('socket.io')(server)`
+    ​	`const io = require('socket.io')(server)`
 
   - configure route
 
-  ​	`app.use(express.static(path.resolve('build')))`
+    ​	`app.use(express.static(path.resolve('build')))`
 
 - [x] MongoDB
 
   - create model
 
-  ​	`mongoose.model(m, new mongoose.Schema(models[m]))`
+    ​	`mongoose.model(m, new mongoose.Schema(models[m]))`
 
   - find element
 
+    ​	`find({}) / find($or:[{},{}])`
 
-  ​	`find({}) / find($or:[{},{}])`
-
-  ​	`findByIdAndUpdate / findOne`
+    ​	`findByIdAndUpdate / findOne`
 
   - update
 
-  ​	`update({},{$set :{ }},{multi: true})`
+    ​	`update({},{$set :{ }},{multi: true})`
 
 - [x] Socket.io
 
-  ​	`io.on('connect') / io.emit() `
+  ​		`io.on('connect') / io.emit() `
 
-  ​	`socket.on() / socket.emit() / socket.once()`
+  ​		`socket.on() / socket.emit() / socket.once()`
 
-  ​	`socket.connect() / socket.disconnect() / socket.removeAllListeners()`
+  ​		`socket.connect() / socket.disconnect() / socket.removeAllListeners()`
 
 ##### 
 
-##### UI
+#### UI
 
 - Login
   - Logo
